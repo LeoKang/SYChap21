@@ -60,8 +60,8 @@ public class DBCPInitListener implements ServletContextListener {
 			int maxTotal = getIntProperty(prop, "maxTotal", 50);
 			poolConfig.setMaxTotal(maxTotal);
 
-			GenericObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnFactory,
-					poolConfig);
+			GenericObjectPool<PoolableConnection> connectionPool
+			= new GenericObjectPool<>(poolableConnFactory, poolConfig);
 			poolableConnFactory.setPool(connectionPool);
 
 			Class.forName("org.apache.commons.dbcp2.PoolingDriver");
