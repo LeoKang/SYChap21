@@ -53,6 +53,7 @@ public class LoginHandler implements CommandHandler {
 			res.sendRedirect(req.getContextPath() + "/index.jsp");
 			return null;
 		} catch (LoginFailException e) {
+			errors.put("idOrPwNotMatch", Boolean.TRUE);
 			return FORM_VIEW;
 		}
 	}
