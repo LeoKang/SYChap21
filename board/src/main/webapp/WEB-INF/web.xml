@@ -30,11 +30,12 @@ version="3.1">
 			<param-value>utf-8</param-value>
 		</init-param>
 	</filter>
+
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<servlet>
 		<servlet-name>ControllerUsingURI</servlet-name>
 		<servlet-class>mvc.controller.ControllerUsingURI</servlet-class>

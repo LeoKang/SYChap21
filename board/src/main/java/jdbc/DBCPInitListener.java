@@ -71,7 +71,6 @@ public class DBCPInitListener implements ServletContextListener {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-
 	}
 
 	private int getIntProperty(Properties prop, String propName, int defaultValue) {
