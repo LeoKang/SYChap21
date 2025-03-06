@@ -37,7 +37,8 @@ public class ArticleDao {
 				rs = stmt.executeQuery("select last_insert_id() from article");
 				if (rs.next()) {
 					Integer newNum = rs.getInt(1);
-					return new Article(newNum,
+					return new Article(
+							newNum,
 							article.getWriter(),
 							article.getTitle(),
 							article.getRegDate(),
@@ -100,7 +101,7 @@ public class ArticleDao {
 						rs.getString("title"),
 						toDate(rs.getTimestamp("regdate")),
 						toDate(rs.getTimestamp("moddate")),
-						rs.getInt("read_cnt"));
+				rs.getInt("read_cnt"));
 	}
 
 	private Date toDate(Timestamp timestamp) {
@@ -109,5 +110,34 @@ public class ArticleDao {
 
 	private Timestamp toTimestamp(Date date) {
 		return new Timestamp(date.getTime());
+	}
+
+	public Article selectById(Connection conn, int no) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement("select * from article where article_no=?");
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+			Article article = null;
+			if (rs.next()) {
+				article = convertArticle(rs);
+			}
+
+			return article;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+
+	public void increaseReadCount(Connection conn, int no) throws SQLException {
+		try (PreparedStatement pstmt = conn
+				.prepareStatement("update article set read_cnt=read_cnt+1 "
+						+ " where article_no=?")) {
+			pstmt.setInt(1, no);
+			pstmt.executeUpdate();
+		}
 	}
 }
