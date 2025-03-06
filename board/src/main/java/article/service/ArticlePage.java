@@ -41,7 +41,7 @@ public class ArticlePage {
 		return total;
 	}
 
-	public boolean hasNoAricles() {
+	public boolean hasNoArticles() {
 		return total == 0;
 	}
 
