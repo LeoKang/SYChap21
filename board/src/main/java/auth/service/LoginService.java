@@ -21,7 +21,7 @@ public class LoginService {
 			}
 			return new User(member.getId(), member.getName());
 		} catch (SQLException e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 	}
 }
