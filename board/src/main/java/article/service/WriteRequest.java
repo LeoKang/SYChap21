@@ -10,7 +10,6 @@ public class WriteRequest {
 	private String content;
 
 	public WriteRequest(Writer writer, String title, String content) {
-		super();
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
