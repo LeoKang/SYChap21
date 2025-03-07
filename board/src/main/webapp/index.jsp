@@ -15,6 +15,7 @@
 		<a href="view/logout.do">[로그아웃하기]</a>
 		<!--	<a href="changePwd.do">[암호변경하기]</a> -->
 		<a href="view/changePwd.do">[암호변경하기]</a>
+		<a href="article/list.do">[게시판이동]</a>
 		<!-- 	</c:if> -->
 	</u:isLogin>
 	<u:notLogin>
