@@ -14,7 +14,7 @@ public class ArticleContentDao {
 
 		try {
 			pstmt = conn.prepareStatement("insert into article_content "
-		+ "(article_no, content) values(?,?)");
+					+ "(article_no, content) values(?,?)");
 			pstmt.setLong(1, content.getNumber());
 			pstmt.setString(2, content.getContent());
 			int insertedCount = pstmt.executeUpdate();
@@ -28,7 +28,7 @@ public class ArticleContentDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
-	
+
 	public ArticleContent selectById(Connection conn, int no) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -44,6 +44,17 @@ public class ArticleContentDao {
 			return content;
 		} finally {
 			JdbcUtil.close(rs);
+		}
+	}
+
+	public int update(Connection conn, int no, String content) throws SQLException {
+		try (PreparedStatement pstmt = conn
+				.prepareStatement("update article_content set content=? "
+						+ " where article_no=?")) {
+			pstmt.setString(1, content);
+			pstmt.setInt(2, no);
+
+			return pstmt.executeUpdate();
 		}
 	}
 }
