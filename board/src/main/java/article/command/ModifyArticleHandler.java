@@ -41,7 +41,7 @@ public class ModifyArticleHandler implements CommandHandler {
 			int no = Integer.parseInt(noVal);
 			ArticleData articleData = readService.getArticle(no, false);
 			User authUser = (User) req.getSession().getAttribute("authUser");
-			if (!canModiy(authUser, articleData)) {
+			if (!canModify(authUser, articleData)) {
 				res.sendError(HttpServletResponse.SC_FORBIDDEN);
 				return null;
 			}
@@ -56,9 +56,9 @@ public class ModifyArticleHandler implements CommandHandler {
 		}
 	}
 
-	private boolean canModiy(User authUser, ArticleData articleData) {
-		String writeId = articleData.getArticle().getWriter().getId();
-		return authUser.getId().equals(writeId);
+	private boolean canModify(User authUser, ArticleData articleData) {
+		String writerId = articleData.getArticle().getWriter().getId();
+		return authUser.getId().equals(writerId);
 	}
 
 	private String processSubmit(HttpServletRequest req, HttpServletResponse res) throws Exception {
